@@ -1,0 +1,102 @@
+.dashboard {
+  display: flex;
+
+  /* Aligned to the product zone. The shell used to sit on a navy
+     (#060b18) while every child page painted itself near-black, which
+     left a visible seam around the content card. */
+  background: var(--bg);
+
+  min-height: 100vh;
+
+  /* navbar height compensation */
+  padding-top: 80px;
+
+  position: relative;
+}
+
+/* A single soft wash behind the whole shell gives the flat near-black
+   some depth without competing with the content. */
+.dashboard::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(900px circle at 12% 0%, rgba(245, 158, 11, 0.05), transparent 60%),
+    radial-gradient(700px circle at 88% 100%, rgba(99, 102, 241, 0.05), transparent 60%);
+}
+
+.main {
+  flex: 1;
+
+  /* sidebar width */
+  margin-left: 260px;
+
+  padding: 40px;
+
+  position: relative;
+  z-index: 1;
+  min-width: 0; /* let wide tables scroll instead of pushing the layout */
+}
+
+.contentArea {
+  background: var(--surface);
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  min-height: 80vh;
+
+  color: var(--text);
+
+  box-shadow: var(--el-3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hairline highlight along the top edge — the detail that makes a
+   surface read as lit rather than filled. */
+.contentArea::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.10) 20%,
+    rgba(245, 158, 11, 0.22) 50%,
+    rgba(255, 255, 255, 0.10) 80%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+  .main {
+    margin-left: 0;
+    padding: 24px 16px;
+  }
+}
+
+/* Placeholder while a split dashboard page loads. Matches the content
+   area's shape so the sidebar and card do not shift.
+
+   The keyframes are declared here rather than reused from the global
+   base layer: CSS Modules rewrites animation names to a hashed local
+   name, so a reference to a global keyframe resolves to nothing. */
+.outletFallback {
+  min-height: 60vh;
+  border-radius: 12px;
+  background: linear-gradient(90deg, var(--surface2) 25%, var(--surface3) 37%, var(--surface2) 63%);
+  background-size: 200% 100%;
+  animation: outletShimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes outletShimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}

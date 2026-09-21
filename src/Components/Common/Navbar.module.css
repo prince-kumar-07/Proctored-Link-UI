@@ -1,0 +1,585 @@
+.nav{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+
+height:80px;
+
+z-index:100;
+
+transition:all .3s ease;
+
+}
+
+.navScroll{
+
+backdrop-filter:blur(12px);
+background:rgba(8,12,22,0.7);
+
+box-shadow:0 1px 0 rgba(255,255,255,0.05);
+
+}
+
+.container{
+
+max-width:1300px;
+margin:auto;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:20px 30px;
+
+}
+
+
+/* LOGO */
+
+.logo{
+
+font-size:20px;
+font-weight:700;
+letter-spacing:.4px;
+color:white;
+
+cursor:pointer;
+
+}
+
+.logo span{
+
+background:linear-gradient(90deg,#5b8cff,#00d4ff);
+-webkit-background-clip:text;
+color:transparent;
+
+}
+
+
+/* LINKS */
+
+.links{
+
+display:flex;
+gap:30px;
+
+}
+
+.links a{
+
+font-size:14px;
+color:#9aa4c7;
+
+position:relative;
+
+cursor:pointer;
+
+}
+
+.links a::after{
+
+content:"";
+
+position:absolute;
+left:0;
+bottom:-6px;
+
+width:0%;
+height:2px;
+
+background:#5b8cff;
+
+transition:.25s;
+
+}
+
+.links a:hover{
+
+color:white;
+
+}
+
+.links a:hover::after{
+
+width:100%;
+
+}
+
+
+/* ACTIONS */
+
+.actions{
+
+display:flex;
+gap:14px;
+
+}
+
+.login{
+
+background:transparent;
+border:none;
+
+color:#9aa4c7;
+
+font-size:14px;
+
+cursor:pointer;
+
+}
+
+.login:hover{
+
+color:white;
+
+}
+
+.primary{
+
+padding:9px 18px;
+
+border-radius:8px;
+
+border:none;
+
+background:linear-gradient(135deg,#5b8cff,#7aa2ff);
+
+color:white;
+
+font-size:14px;
+
+cursor:pointer;
+
+transition:.25s;
+
+}
+
+.primary:hover{
+
+transform:translateY(-2px);
+
+box-shadow:0 8px 20px rgba(91,140,255,0.4);
+
+}
+
+/* PROFILE ─ trigger */
+
+.profileWrapper {
+  position: relative;
+}
+
+.profileIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #5b8cff, #7aa2ff);
+
+  color: white;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.profileIcon:hover {
+  transform: scale(1.05);
+}
+
+
+/* ============================================================
+   PROFILE DROPDOWN — premium glass card
+   ============================================================ */
+
+.profileModal {
+  position: absolute;
+  top: 52px;
+  right: 0;
+
+  width: 300px;
+
+  background: rgba(13, 17, 32, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 18px;
+
+  padding: 8px;
+
+  box-shadow:
+    0 24px 60px -12px rgba(0, 0, 0, 0.65),
+    0 4px 16px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+  overflow: hidden;
+  transform-origin: top right;
+
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  backdrop-filter: blur(24px) saturate(160%);
+}
+
+/* Soft indigo bloom in the top corner — the same signature glow used
+   across the marketing zone, so the dropdown reads as part of it. */
+.profileModalGlow {
+  position: absolute;
+  top: -60px;
+  right: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 70%);
+  pointer-events: none;
+}
+
+/* ---- Header: avatar, identity, role ---- */
+.profileHeader {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 14px 12px 14px;
+}
+
+.avatarRing {
+  position: relative;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--mk-sky, #5b8cff), var(--mk-cyan, #00d4ff));
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #5b8cff, #7aa2ff);
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.onlineDot {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #34d399;
+  border: 2.5px solid #0d1120;
+  box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55);
+  animation: profileOnlinePulse 2.4s ease-out infinite;
+}
+
+@keyframes profileOnlinePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+.profileMeta {
+  flex: 1;
+  min-width: 0;
+  padding-top: 1px;
+}
+
+.name {
+  margin: 0 0 3px;
+  color: white;
+  font-size: 14.5px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.email {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0;
+  font-size: 12px;
+  color: #9aa4c7;
+}
+
+.email span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.emailIcon {
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+}
+
+.roleBadge {
+  flex-shrink: 0;
+  align-self: flex-start;
+  margin-top: 2px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.16);
+  border: 1px solid rgba(129, 140, 248, 0.28);
+  white-space: nowrap;
+}
+
+/* ---- Divider ---- */
+.profileDivider {
+  height: 1px;
+  margin: 2px 4px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.10) 15%,
+    rgba(255, 255, 255, 0.10) 85%,
+    transparent
+  );
+}
+
+/* ---- Menu items ---- */
+.menuList {
+  padding: 6px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  width: 100%;
+  padding: 9px 10px;
+
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+
+  color: #d7dbf0;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background var(--dur-2, 0.2s) var(--ease, ease),
+    color var(--dur-2, 0.2s) var(--ease, ease),
+    transform var(--dur-1, 0.12s) var(--ease, ease);
+}
+
+.menuItem:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+}
+
+.menuItem:active {
+  transform: scale(0.98);
+}
+
+.menuIcon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #a5b4fc;
+  font-size: 15px;
+  transition: background var(--dur-2, 0.2s) var(--ease, ease), color var(--dur-2, 0.2s) var(--ease, ease);
+}
+
+.menuItem:hover .menuIcon {
+  background: rgba(99, 102, 241, 0.22);
+  color: #c7d2fe;
+}
+
+.menuLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.menuChevron {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: #565c7d;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity var(--dur-2, 0.2s) var(--ease, ease), transform var(--dur-2, 0.2s) var(--ease, ease);
+}
+
+.menuItem:hover .menuChevron {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- Sign out ---- */
+.logoutItem {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  width: 100%;
+  padding: 9px 10px;
+  margin: 6px 0 2px;
+
+  border: none;
+  border-radius: 11px;
+  background: transparent;
+
+  color: #fca5a5;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: background var(--dur-2, 0.2s) var(--ease, ease), transform var(--dur-1, 0.12s) var(--ease, ease);
+}
+
+.logoutItem .menuIcon {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+}
+
+.logoutItem:hover {
+  background: rgba(239, 68, 68, 0.12);
+  color: #fecaca;
+}
+
+.logoutItem:hover .menuIcon {
+  background: rgba(239, 68, 68, 0.22);
+  color: #fca5a5;
+}
+
+.logoutItem:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onlineDot { animation: none; }
+}
+/* ============================================================
+   PREMIUM LAYER
+   ============================================================ */
+
+.nav {
+  transition:
+    background var(--dur-3) var(--ease),
+    backdrop-filter var(--dur-3) var(--ease),
+    box-shadow var(--dur-3) var(--ease),
+    height var(--dur-3) var(--ease);
+}
+
+/* Condense slightly once the page scrolls — the nav gets out of the way. */
+.navScroll {
+  height: 66px;
+  background: rgba(8, 12, 22, 0.72);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 8px 32px rgba(0, 0, 0, 0.36);
+}
+.navScroll .container { padding-top: 13px; padding-bottom: 13px; }
+
+/* Reading progress */
+.progress {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 2px;
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, var(--mk-sky), var(--mk-violet-2), var(--mk-cyan));
+  opacity: 0;
+  transition: opacity var(--dur-3) var(--ease);
+}
+.navScroll .progress { opacity: 1; }
+
+/* Logo */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  transition: opacity var(--dur-2) var(--ease);
+}
+.logo:hover { opacity: 0.85; }
+.logoMark {
+  width: 22px; height: 22px;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--mk-sky), var(--mk-cyan));
+  box-shadow: 0 4px 14px rgba(91, 140, 255, 0.45);
+  transition: transform var(--dur-3) var(--ease-back);
+}
+.logo:hover .logoMark { transform: rotate(-12deg) scale(1.08); }
+
+/* Links — underline now grows from the centre out */
+.links a {
+  padding: 4px 0;
+  transition: color var(--dur-2) var(--ease);
+}
+.links a::after {
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--mk-sky), var(--mk-cyan));
+  transition: width var(--dur-2) var(--ease);
+}
+.linkActive { color: #fff !important; }
+.linkActive::after { width: 100% !important; }
+
+/* Buttons */
+.login { transition: color var(--dur-2) var(--ease); }
+
+.primary {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease);
+}
+.primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.3) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.7s var(--ease);
+}
+.primary:hover::after { transform: translateX(120%); }
+.primary:active { transform: translateY(0) scale(0.97); }
+
+/* Avatar trigger is a real <button> now, so reset UA styling. */
+.profileIcon {
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  transition: transform var(--dur-2) var(--ease-back), box-shadow var(--dur-2) var(--ease);
+}
+.profileIcon:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 18px rgba(91, 140, 255, 0.45);
+}
+.profileIcon:active { transform: scale(0.97); }

@@ -1,0 +1,10 @@
+/* Design tokens and the global base layer must load before Tailwind's
+   utilities so utilities keep the upper hand. Fonts are loaded from
+   index.html with preconnect, not via CSS @import (which serialises
+   requests and blocks first paint). */
+@import './styles/tokens.css';
+@import './styles/base.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

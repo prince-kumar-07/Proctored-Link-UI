@@ -1,0 +1,214 @@
+.settings{
+
+max-width:600px;
+display: flex;
+flex-direction: column;
+gap: 28px;
+
+}
+
+.settings h2{
+
+margin-bottom:-5px;
+
+color:white;
+font-family: 'Sora', sans-serif;
+
+}
+
+.section {
+  background: #0d0f18;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 22px 24px 26px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-weight: 600;
+  font-size: 14.5px;
+}
+
+.sectionIcon {
+  color: #f59e0b;
+  font-size: 16px;
+}
+
+.form{
+
+display:flex;
+flex-direction:column;
+
+gap:18px;
+
+}
+
+.form label{
+
+display:flex;
+flex-direction:column;
+
+font-size:14px;
+
+color:#9aa4c7;
+
+}
+
+.form input{
+
+margin-top:6px;
+
+padding:10px;
+
+border-radius:6px;
+
+border:1px solid rgba(255,255,255,0.1);
+
+background:#0f172a;
+
+color:white;
+
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245,158,11,0.10);
+}
+
+.pwInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+}
+.pwInputWrap input {
+  margin-top: 0;
+  width: 100%;
+  padding-right: 38px;
+  box-sizing: border-box;
+}
+.form button.eyeBtn {
+  position: absolute;
+  right: 10px;
+  margin-top: 0;
+  padding: 4px;
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  font-size: 15px;
+}
+.form button.eyeBtn:hover { color: #9aa4c7; background: none; }
+
+.fieldError {
+  margin: -8px 0 0;
+  font-size: 12.5px;
+  color: #f87171;
+}
+
+.form button{
+
+margin-top:10px;
+
+padding:10px;
+
+border:none;
+
+border-radius:6px;
+
+background:#3b82f6;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+.form button:hover{
+background:#2563eb;
+}
+
+/* ── TWO-FACTOR ── */
+.twoFactorBody {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.twoFactorRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.twoFactorTitle {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #e8eaf0;
+  font-weight: 500;
+}
+
+.twoFactorDesc {
+  margin: 0;
+  font-size: 12.5px;
+  color: #9aa4c7;
+  line-height: 1.55;
+  max-width: 380px;
+}
+
+.toggle {
+  flex-shrink: 0;
+  width: 46px;
+  height: 26px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: #1e2536;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  padding: 0;
+}
+.toggle:disabled { cursor: not-allowed; opacity: 0.7; }
+
+.toggleKnob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #9aa4c7;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.toggleOn {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  border-color: transparent;
+}
+.toggleOn .toggleKnob {
+  transform: translateX(20px);
+  background: #07080d;
+}
+
+.mandatoryNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border-radius: 9px;
+  background: rgba(245,158,11,0.10);
+  border: 1px solid rgba(245,158,11,0.24);
+  color: #f59e0b;
+  font-size: 12.5px;
+  font-weight: 500;
+}

@@ -1,0 +1,161 @@
+/* ───────── FULLSCREEN BLUR OVERLAY ───────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 6, 14, 0.62);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 9999;
+  animation: overlayIn 0.22s var(--ease, ease) both;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ───────── CENTER CONTAINER ───────── */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: containerIn 0.32s var(--ease, ease) both;
+}
+
+@keyframes containerIn {
+  from { opacity: 0; transform: translateY(10px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ───────── SPINNER BASE ─────────
+   Concentric rings at staggered speeds. Each ring only paints a single
+   arc, so the whole thing reads as one object rotating in depth rather
+   than four unrelated circles. */
+.spinner {
+  position: relative;
+  display: inline-block;
+}
+
+.spinner div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+  animation: spin 1.15s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+}
+
+.spinner div:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  border-top-color: #6366f1;
+  border-right-color: rgba(99, 102, 241, 0.25);
+  animation-duration: 1.15s;
+}
+
+.spinner div:nth-child(2) {
+  width: 78%;
+  height: 78%;
+  top: 11%;
+  left: 11%;
+  border-top-color: #8b5cf6;
+  border-right-color: rgba(139, 92, 246, 0.2);
+  animation-duration: 1.45s;
+  animation-direction: reverse;
+}
+
+.spinner div:nth-child(3) {
+  width: 56%;
+  height: 56%;
+  top: 22%;
+  left: 22%;
+  border-top-color: #a78bfa;
+  border-right-color: rgba(167, 139, 250, 0.18);
+  animation-duration: 1.05s;
+}
+
+.spinner div:nth-child(4) {
+  width: 34%;
+  height: 34%;
+  top: 33%;
+  left: 33%;
+  border-top-color: #c4b5fd;
+  animation-duration: 0.85s;
+  animation-direction: reverse;
+}
+
+/* Soft core glow so the centre does not read as an empty hole. */
+.spinner::after {
+  content: "";
+  position: absolute;
+  inset: 38%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.55), transparent 70%);
+  animation: corePulse 1.8s ease-in-out infinite;
+}
+
+@keyframes corePulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50%      { opacity: 0.9;  transform: scale(1.1); }
+}
+
+/* Sizes */
+.small  { width: 50px;  height: 50px; }
+.medium { width: 80px;  height: 80px; }
+.large  { width: 104px; height: 104px; }
+
+/* Message */
+.message {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #e8eaf0;
+  letter-spacing: 0.2px;
+  text-align: center;
+  max-width: 320px;
+}
+
+/* Three dots that keep time while the message sits still. */
+.dots {
+  display: inline-flex;
+  gap: 5px;
+}
+.dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  animation: dotBounce 1.1s ease-in-out infinite;
+}
+.dots span:nth-child(2) { animation-delay: 0.14s; }
+.dots span:nth-child(3) { animation-delay: 0.28s; }
+
+@keyframes dotBounce {
+  0%, 80%, 100% { opacity: 0.3; transform: translateY(0); }
+  40%           { opacity: 1;   transform: translateY(-5px); }
+}
+
+/* Animation */
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* A loader must still communicate "busy" without motion, so the rings
+   hold a static arc and only the dots fade gently. */
+@media (prefers-reduced-motion: reduce) {
+  .spinner div { animation: none; }
+  .spinner::after { animation: none; opacity: 0.6; }
+  .overlay, .container { animation: none; }
+  .dots span { animation: dotFade 1.4s ease-in-out infinite; }
+  @keyframes dotFade {
+    0%, 100% { opacity: 0.3; }
+    50%      { opacity: 1; }
+  }
+}

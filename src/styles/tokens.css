@@ -1,0 +1,141 @@
+/* ============================================================
+   ProctoredLink — canonical design tokens
+   Single source of truth. Previously these lived in 17 separate
+   `:root` blocks inside CSS Modules; because CSS Modules does not
+   scope `:root`, they all leaked globally and fought each other.
+   Page-specific overrides now live scoped to that page's root
+   element, so they can no longer bleed across routes.
+   ============================================================ */
+
+:root {
+  /* ---- Product surfaces (near-black / amber zone) ---- */
+  --bg:          #07080d;
+  --bg2:         #080b14;
+  --surface:     #0d0f18;
+  --surface2:    #111420;
+  --surface3:    #161928;
+  --surface4:    #171c30;
+  --surface-hi:  #1c2138;
+
+  --glass-dark:  rgba(8, 10, 20, 0.90);
+  --glass-light: rgba(255, 255, 255, 0.92);
+
+  --border:      rgba(255, 255, 255, 0.07);
+  --border-hi:   rgba(255, 255, 255, 0.13);
+  --border-2x:   rgba(255, 255, 255, 0.13);
+  --border-glow: rgba(234, 179, 8, 0.24);
+
+  /* ---- Amber accent ---- */
+  --accent:      #f59e0b;
+  --accent-lo:   rgba(245, 158, 11, 0.10);
+  --accent-md:   rgba(245, 158, 11, 0.18);
+  --accent-glow: rgba(245, 158, 11, 0.28);
+
+  --amber:        #f0a500;
+  --amber-bright: #f5b731;
+  --amber-dim:    #c47f00;
+  --amber-lo:     rgba(240, 165, 0, 0.07);
+  --amber-md:     rgba(240, 165, 0, 0.13);
+  --amber-hi:     rgba(240, 165, 0, 0.24);
+  --amber-glow:   rgba(240, 165, 0, 0.18);
+
+  /* ---- Semantic ---- */
+  --green:        #10b981;
+  --green-bright: #34d399;
+  --green-lo:     rgba(16, 185, 129, 0.07);
+  --green-md:     rgba(16, 185, 129, 0.16);
+  --green-glow:   rgba(16, 185, 129, 0.28);
+
+  --red:          #ef4444;
+  --red-bright:   #f87171;
+  --red-lo:       rgba(239, 68, 68, 0.07);
+  --red-md:       rgba(239, 68, 68, 0.16);
+  --red-bdr:      rgba(248, 113, 113, 0.20);
+  --red-glow:     rgba(239, 68, 68, 0.28);
+
+  --blue:         #3b82f6;
+  --blue-lo:      rgba(59, 130, 246, 0.08);
+  --blue-md:      rgba(59, 130, 246, 0.16);
+
+  /* ---- Type ---- */
+  --text:      #e8eaf0;
+  --text-dim:  #c5c8dc;
+  --text2:     #8b8fa8;
+  --muted:     #636880;
+  --muted2:    #3d4157;
+
+  --font-display: 'Sora', system-ui, -apple-system, sans-serif;
+  --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-ui:      'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---- Difficulty ---- */
+  --diff-easy: #10b981;
+  --diff-med:  #f0a500;
+  --diff-hard: #ef4444;
+
+  /* ---- Layout ---- */
+  --navbar-h: 60px;
+  --topbar-h: 50px;
+  --panel-w:  220px;
+
+  /* ---- Radii ---- */
+  --radius:    14px;
+  --radius-sm: 9px;
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+
+  --glow: 0 0 50px rgba(245, 158, 11, 0.06);
+
+  /* ---- Marketing zone (indigo / violet) ----
+     Kept deliberately distinct from the product zone, the way a
+     marketing site differs from the dashboard behind the login. */
+  --mk-bg:      #0a0e1f;
+  --mk-bg2:     #0f172a;
+  --mk-surface: #111827;
+  --mk-indigo:  #6366f1;
+  --mk-violet:  #7c3aed;
+  --mk-violet-2:#8b5cf6;
+  --mk-lilac:   #a78bfa;
+  --mk-periwinkle: #a5b4fc;
+  --mk-sky:     #5b8cff;
+  --mk-cyan:    #00d4ff;
+  --mk-text:    #f8f9ff;
+  --mk-muted:   #9aa4c7;
+  --mk-border:  rgba(255, 255, 255, 0.07);
+  --mk-glow:    rgba(99, 102, 241, 0.22);
+
+  /* ============ MOTION SYSTEM ============
+     One shared vocabulary so every surface accelerates and settles
+     the same way. Durations are deliberately short; "premium" reads
+     as responsive, not slow. */
+  --ease:      cubic-bezier(0.16, 1, 0.30, 1);   /* signature settle */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:   cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-back: cubic-bezier(0.34, 1.56, 0.64, 1);/* slight overshoot */
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dur-1: 120ms;  /* taps, colour shifts */
+  --dur-2: 200ms;  /* hovers */
+  --dur-3: 320ms;  /* cards, panels */
+  --dur-4: 520ms;  /* entrances */
+  --dur-5: 800ms;  /* hero / scroll reveal */
+
+  /* ---- Elevation ---- */
+  --el-1: 0 1px 2px rgba(0,0,0,0.30);
+  --el-2: 0 4px 12px rgba(0,0,0,0.35);
+  --el-3: 0 12px 32px rgba(0,0,0,0.40);
+  --el-4: 0 24px 56px rgba(0,0,0,0.48);
+  --el-5: 0 40px 80px rgba(0,0,0,0.60);
+}
+
+/* Respect the OS setting. Anything that moves must stop moving here. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 1ms; --dur-2: 1ms; --dur-3: 1ms;
+    --dur-4: 1ms; --dur-5: 1ms;
+  }
+}

@@ -1,0 +1,458 @@
+.page {
+  background: 
+    radial-gradient(circle at 15% 20%, #6366f144 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, #7c3aed44 0%, transparent 50%),
+    linear-gradient(145deg, #0a0e1f 0%, #0f172a 100%);
+  color: #f8f9ff;
+  min-height: 100vh;
+  font-family: "Inter", system-ui, sans-serif;
+}
+
+/* Shared Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+/* Hero */
+.hero {
+  padding: 10rem 0 6rem;
+}
+
+.title {
+  font-size: clamp(3.2rem, 7vw, 5.2rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.35rem;
+  opacity: 0.85;
+  max-width: 720px;
+  margin: 0 auto 3rem;
+}
+
+/* Toggle */
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin: 2rem 0 5rem;
+}
+
+.toggleText {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.discount {
+  color: #34d399;
+  font-weight: 600;
+  margin-left: 0.4rem;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 36px;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: #1b2341;
+  transition: .4s;
+  border-radius: 36px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 28px;
+  width: 28px;
+  left: 4px;
+  bottom: 4px;
+  background: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background: linear-gradient(90deg, #6366f1, #7c3aed);
+}
+
+input:checked + .slider:before {
+  transform: translateX(28px);
+}
+
+/* Pricing Cards */
+.plansSection {
+  padding: 0 2rem 8rem;
+}
+
+.plansGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.planCard {
+  background: rgba(15, 23, 42, 0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  position: relative;
+  transition: all 0.4s ease;
+}
+
+.planCard:hover {
+  transform: translateY(-10px);
+  border-color: #6366f1;
+  box-shadow: 0 25px 60px rgba(99,102,241,0.18);
+}
+
+.popular {
+  border: 2px solid #6366f1;
+  background: rgba(15, 23, 42, 0.88);
+  transform: scale(1.04);
+  z-index: 2;
+}
+
+.popular:hover {
+  transform: scale(1.06) translateY(-10px);
+}
+
+.popularBadge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  color: white;
+  padding: 0.5rem 1.3rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.planTitle {
+  font-size: 1.9rem;
+  margin-bottom: 0.6rem;
+}
+
+.planSubtitle {
+  opacity: 0.75;
+  margin-bottom: 2rem;
+}
+
+.priceBlock {
+  font-size: 3.8rem;
+  font-weight: 700;
+  margin: 1.2rem 0;
+}
+
+.currency, .period {
+  font-size: 1.8rem;
+  opacity: 0.8;
+}
+
+.customPrice {
+  font-size: 2.8rem;
+}
+
+.billingNote {
+  font-size: 1rem;
+  opacity: 0.7;
+  margin-bottom: 2.2rem;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2.5rem;
+  text-align: left;
+}
+
+.featureList li {
+  margin: 1rem 0;
+  font-size: 1.08rem;
+}
+
+.featureList li::before {
+  content: "✓ ";
+  color: #6366f1;
+  margin-right: 0.6rem;
+}
+
+.btnPrimary, .btnOutline, .btnLarge {
+  width: 100%;
+  padding: 1.15rem;
+  border-radius: 0.9rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #6366f1, #7c3aed);
+  border: none;
+  color: white;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(99,102,241,0.35);
+}
+
+.btnOutline {
+  background: transparent;
+  border: 1.5px solid #6366f1;
+  color: white;
+}
+
+.btnOutline:hover {
+  background: rgba(99,102,241,0.1);
+}
+
+.btnLarge {
+  max-width: 320px;
+  margin: 2rem auto 1rem;
+  font-size: 1.2rem;
+  padding: 1.3rem 2.5rem;
+}
+
+/* Comparison */
+.comparisonSection {
+  padding: 6rem 0 10rem;
+  background: linear-gradient(to bottom, rgba(10,14,31,0.4), transparent);
+}
+
+.sectionTitle {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  margin-bottom: 4rem;
+}
+
+.tableContainer {
+  overflow-x: auto;
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(15,23,42,0.65);
+  backdrop-filter: blur(12px);
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.page th, .page td {
+  padding: 1.3rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.page th {
+  background: rgba(99,102,241,0.14);
+  font-weight: 600;
+}
+
+.highlightColumn {
+  font-weight: 700;
+  color: #c4b5fd;
+}
+
+/* FAQ */
+.faqSection {
+  padding: 8rem 0 10rem;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 2.2rem;
+  margin-bottom: 5rem;
+}
+
+.faqItem {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(99,102,241,0.16);
+  border-radius: 1.3rem;
+  padding: 2.2rem;
+  transition: all 0.35s ease;
+}
+
+.faqItem:hover {
+  transform: translateY(-8px);
+  border-color: #6366f1;
+}
+
+.faqQuestion {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #e0e7ff;
+}
+
+.faqAnswer {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.faqCta {
+  text-align: center;
+}
+
+.faqCta p {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.faqButtons button {
+  margin: 0 1rem 1rem;
+  min-width: 200px;
+}
+
+/* Final CTA */
+.finalCta {
+  padding: 10rem 0 12rem;
+  background: linear-gradient(135deg, #0a1125, #0f172a);
+}
+
+.ctaTitle {
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  margin-bottom: 1.5rem;
+}
+
+.ctaText {
+  font-size: 1.4rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+
+.ctaSmall {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.link {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .plansGrid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .popular { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .hero { padding: 8rem 0 4rem; }
+  .plansSection, .comparisonSection, .faqSection, .finalCta { padding: 6rem 0; }
+  .faqGrid { grid-template-columns: 1fr; }
+}
+/* ============================================================
+   PREMIUM LAYER
+   ============================================================ */
+
+/* The billing toggle now drives real prices, so the labels need to
+   show which side is active. */
+.toggleText {
+  transition: color var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease);
+  opacity: 0.6;
+}
+.toggleActive { opacity: 1; color: #fff; font-weight: 600; }
+
+.slider { transition: background 0.35s var(--ease); }
+.slider:before { transition: transform 0.35s var(--ease-back); }
+
+/* Price swaps animate, so the block needs a stable box to swap inside. */
+.priceBlock { position: relative; }
+.price { display: inline-block; }
+
+.planCard {
+  position: relative;
+  transition:
+    transform var(--dur-3) var(--ease),
+    box-shadow var(--dur-3) var(--ease),
+    border-color var(--dur-3) var(--ease);
+}
+.planCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.42);
+  border-color: rgba(139, 92, 246, 0.38);
+}
+
+.popular { position: relative; }
+.popular::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99,102,241,0.7), rgba(124,58,237,0.25), rgba(0,212,255,0.5));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.featureList li {
+  transition: color var(--dur-2) var(--ease), transform var(--dur-2) var(--ease);
+}
+.planCard:hover .featureList li { color: #e0e7ff; }
+
+.btnPrimary, .btnOutline, .btnLarge {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease);
+}
+.btnPrimary::after, .btnLarge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.26) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.75s var(--ease);
+  pointer-events: none;
+}
+.btnPrimary:hover::after, .btnLarge:hover::after { transform: translateX(120%); }
+.btnPrimary:active, .btnOutline:active, .btnLarge:active { transform: scale(0.98); }
+
+/* Comparison rows */
+.comparisonTable tbody tr {
+  transition: background var(--dur-2) var(--ease);
+}
+.comparisonTable tbody tr:hover { background: rgba(99, 102, 241, 0.07); }
+
+/* Wide tables should scroll, not overflow the page. */
+.tableContainer { overflow-x: auto; }
+
+.faqItem {
+  transition: transform var(--dur-3) var(--ease), border-color var(--dur-3) var(--ease);
+}
+.faqItem:hover { transform: translateY(-3px); border-color: rgba(139, 92, 246, 0.3); }

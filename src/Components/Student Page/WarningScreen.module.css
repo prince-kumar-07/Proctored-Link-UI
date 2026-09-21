@@ -1,0 +1,466 @@
+
+.page {
+  --bg:         #07080d;
+  --surface:    #0d0f18;
+  --surface2:   #111420;
+  --surface3:   #161928;
+  --border:     rgba(255,255,255,0.06);
+  --border-hi:  rgba(255,255,255,0.11);
+  --accent:     #f59e0b;
+  --accent-lo:  rgba(245,158,11,0.10);
+  --accent-md:  rgba(245,158,11,0.18);
+  --accent-glow:rgba(245,158,11,0.28);
+  --red:        #f87171;
+  --red-lo:     rgba(248,113,113,0.10);
+  --red-bdr:    rgba(248,113,113,0.20);
+  --text:       #e8eaf0;
+  --muted:      #636880;
+  --muted2:     #3d4157;
+  --ease:       cubic-bezier(.16,1,.3,1);
+}
+
+/* ── PAGE ──
+   Rendered by ExamSecurityGuard on top of the exam page it's guarding
+   (not in place of it — see that component for why), so this needs to
+   actually cover the viewport rather than just sit in normal document
+   flow. WarningScreen has no other caller, so this is safe to make
+   fixed unconditionally. z-index sits above Spinner's 9999: a security
+   warning must never be hidden behind a loading overlay. */
+.page {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  overflow-y: auto;
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── ATMOSPHERE ── */
+.blob1 {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -62%);
+  width: 720px; height: 620px;
+  background: radial-gradient(ellipse,
+    rgba(245,158,11,0.06) 0%, transparent 68%);
+  pointer-events: none; z-index: 0;
+  animation: breathe 8s ease-in-out infinite;
+}
+.blob2 {
+  position: fixed; bottom: -200px; right: -160px;
+  width: 640px; height: 640px;
+  background: radial-gradient(circle,
+    rgba(99,102,241,0.04) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+  animation: drift 26s ease-in-out infinite alternate;
+}
+@keyframes breathe {
+  0%,100% { transform: translate(-50%,-62%) scale(1);    opacity: 1; }
+  50%      { transform: translate(-50%,-62%) scale(1.08); opacity: 0.65; }
+}
+@keyframes drift {
+  from { transform: translate(0,0); }
+  to   { transform: translate(20px,16px); }
+}
+
+.grain {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 1; opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.gridLines {
+  position: fixed; inset: 0; z-index: 0;
+  display: flex; justify-content: space-between;
+  pointer-events: none;
+}
+.gridLine {
+  width: 1px;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(255,255,255,0.022) 20%,
+    rgba(255,255,255,0.022) 80%,
+    transparent 100%);
+}
+
+/* ── CARD ── */
+.card {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 460px;
+  background: var(--surface);
+  border: 1px solid var(--border-hi);
+  border-radius: 22px;
+  padding: 0 0 28px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.05) inset,
+    0 32px 80px rgba(0,0,0,0.55),
+    0 0 0 1px rgba(0,0,0,0.4);
+  animation: cardIn 0.55s var(--ease) both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* amber hairline */
+.cardLine {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--accent) 40%,
+    rgba(251,191,36,0.6) 60%,
+    transparent 100%);
+  margin-bottom: 28px;
+  animation: lineGrow 0.9s var(--ease) 0.15s both;
+  transform-origin: left;
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); opacity: 0; }
+  to   { transform: scaleX(1); opacity: 1; }
+}
+
+/* inner padding wrapper */
+.card > *:not(.cardLine):not(.issueList):not(.recheckBtn) {
+  padding-left: 28px;
+  padding-right: 28px;
+}
+
+/* ── BADGE ── */
+.badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 13px; border-radius: 20px;
+  border: 1px solid var(--red-bdr);
+  background: var(--red-lo);
+  color: var(--red);
+  font-size: 11.5px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  margin-bottom: 20px;
+  margin-left: 28px;
+  animation: fadeDown 0.45s var(--ease) 0.1s both;
+}
+.badgeDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+  animation: dotPulse 1.6s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.7); }
+}
+.badgeIcon { font-size: 11px; }
+
+/* ── TITLE ── */
+.title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(32px, 7vw, 44px);
+  font-weight: 800;
+  letter-spacing: -1.2px;
+  line-height: 1.0;
+  color: #fff; margin: 0 0 10px;
+  padding-left: 28px; padding-right: 28px;
+  animation: fadeDown 0.45s var(--ease) 0.16s both;
+}
+.titleAccent {
+  background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 50%, #f59e0b 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  from { background-position: 0% center; }
+  to   { background-position: 200% center; }
+}
+
+.subtitle {
+  font-size: 13.5px; color: var(--muted);
+  line-height: 1.65; font-weight: 300;
+  margin: 0 0 24px;
+  padding-left: 28px; padding-right: 28px;
+  animation: fadeDown 0.45s var(--ease) 0.22s both;
+}
+
+/* ── ESCALATION BANNER ──
+   Shown only for violations the server counts toward the 3-strike
+   termination threshold, once the server has actually confirmed a
+   strike landed. Deliberately louder than the generic issue rows below
+   it — this is the one message a candidate must not be able to miss. */
+.escalationBanner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin: 0 28px 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(248, 113, 113, 0.10);
+  border: 1px solid rgba(248, 113, 113, 0.32);
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.06) inset, 0 8px 24px rgba(248, 113, 113, 0.08);
+  animation: fadeDown 0.4s var(--ease) 0.18s both, escalationPulse 2.2s ease-in-out 0.6s infinite;
+}
+@keyframes escalationPulse {
+  0%, 100% { border-color: rgba(248, 113, 113, 0.32); }
+  50%      { border-color: rgba(248, 113, 113, 0.55); }
+}
+.escalationIcon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-size: 18px;
+  color: var(--red);
+}
+.escalationTitle {
+  margin: 0 0 3px;
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #fecaca;
+}
+.escalationText {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(254, 202, 202, 0.85);
+  font-weight: 400;
+}
+
+/* ── OFFLINE NOTICE ──
+   Honest state: the violation is real and still shown/blocked above,
+   but the attempt to log it with the server didn't succeed. */
+.offlineNotice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 28px 18px;
+  padding: 9px 14px;
+  border-radius: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border-hi);
+  font-size: 12px;
+  color: var(--muted);
+}
+.offlineIcon { flex-shrink: 0; font-size: 13px; color: var(--accent); }
+
+/* A row the server actually counts toward termination gets a visible
+   left rail so it reads as more serious than e.g. "window too small". */
+.issueRowReportable {
+  border-left: 2px solid rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.03);
+}
+
+/* ── DIVIDER ── */
+.divider {
+  display: flex; align-items: center; gap: 10px;
+  padding: 0 28px;
+  margin-bottom: 10px;
+  animation: fadeDown 0.45s var(--ease) 0.26s both;
+}
+.dividerLine {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, transparent, var(--border-hi), transparent);
+}
+.dividerLabel {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10.5px; font-weight: 700;
+  color: var(--muted2); letter-spacing: 0.8px;
+  text-transform: uppercase; white-space: nowrap;
+}
+.dividerIcon { font-size: 10px; }
+
+/* ── ISSUE LIST ── */
+.issueList {
+  display: flex; flex-direction: column;
+  padding: 8px 0 6px;
+  margin-bottom: 20px;
+}
+
+/* ── ISSUE ROW ── */
+.issueRow {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 28px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  animation: rowIn 0.4s var(--ease) both;
+  opacity: 0;
+}
+.issueRow:last-child { border-bottom: none; }
+.issueRow:hover { background: rgba(255,255,255,0.018); }
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.issueLeft {
+  display: flex; align-items: center; gap: 11px; min-width: 0;
+}
+.issueDot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0; opacity: 0.75;
+}
+.issueText {
+  font-size: 13.5px; color: var(--text);
+  font-weight: 400; margin: 0; letter-spacing: 0.01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* ── FIX BUTTON ── */
+.fixBtn {
+  flex-shrink: 0;
+  padding: 5px 13px; border-radius: 7px;
+  border: 1px solid var(--border-hi);
+  background: var(--surface2);
+  color: var(--muted);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; font-weight: 500;
+  letter-spacing: 0.02em; cursor: pointer;
+  white-space: nowrap;
+  transition: border-color 0.16s, color 0.16s, background 0.16s;
+}
+.fixBtn:hover {
+  border-color: var(--accent-md);
+  color: var(--accent);
+  background: var(--accent-lo);
+}
+.fixBtn:active { opacity: 0.75; transform: scale(0.97); }
+
+/* ── RECHECK BUTTON ── */
+.recheckBtn {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center; gap: 9px;
+  width: calc(100% - 56px); margin: 0 28px;
+  padding: 14px 0;
+  border: 1px solid var(--border-hi);
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #07080d;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px; font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 26px var(--accent-glow);
+  transition: filter 0.15s, box-shadow 0.15s, transform 0.15s;
+  animation: fadeDown 0.45s var(--ease) 0.5s both;
+}
+.recheckBtn:hover {
+  filter: brightness(1.07);
+  box-shadow: 0 10px 36px var(--accent-glow);
+  transform: translateY(-1px);
+}
+.recheckBtn:active { transform: translateY(0); filter: brightness(0.97); }
+
+.recheckIcon { font-size: 15px; flex-shrink: 0; }
+
+.recheckShine {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg,
+    transparent 35%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 65%);
+  background-size: 200% 100%;
+  background-position: 200% 0;
+  transition: background-position 0.55s;
+}
+.recheckBtn:hover .recheckShine { background-position: -200% 0; }
+
+/* ── FOOTER ── */
+.footer {
+  display: flex; align-items: center; gap: 7px;
+  padding: 20px 28px 0;
+  animation: fadeDown 0.45s var(--ease) 0.56s both;
+}
+.footerIcon { font-size: 12px; color: var(--muted2); flex-shrink: 0; }
+.footerText {
+  font-size: 11.5px; color: var(--muted2);
+  font-weight: 300; flex: 1;
+}
+.footerBrand {
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--muted2); letter-spacing: 0.4px;
+}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-7px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 500px) {
+  .card { border-radius: 16px; }
+  .title { font-size: 34px; }
+  .recheckBtn { width: calc(100% - 36px); margin: 0 18px; }
+  .card > *:not(.cardLine):not(.issueList):not(.recheckBtn) {
+    padding-left: 18px; padding-right: 18px;
+  }
+  .issueRow { padding: 12px 18px; }
+  .badge, .divider, .footer { padding-left: 18px; padding-right: 18px; }
+  .badge { margin-left: 18px; }
+}
+/* ============================================================
+   PREMIUM LAYER — exam flow
+   Deliberately restrained. These are high-stakes, timed, proctored
+   screens: motion here is limited to input focus and press feedback,
+   which aid confidence rather than distract. Decorative movement is
+   already handled by the global reduced-motion backstop.
+   ============================================================ */
+
+.input,
+.otpInput,
+.fieldGroup input,
+.form input,
+.form select,
+.form textarea {
+  transition:
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease);
+}
+
+.input:focus,
+.otpInput:focus,
+.fieldGroup input:focus,
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.14);
+}
+
+.btnProceed,
+.btnPrimary,
+.btnOutline,
+.fullscreenBtn,
+.eyeBtn {
+  transition:
+    transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease),
+    border-color var(--dur-2) var(--ease),
+    opacity var(--dur-2) var(--ease);
+}
+
+.btnProceed:not(:disabled):active,
+.btnPrimary:active,
+.btnOutline:active,
+.fullscreenBtn:active,
+.eyeBtn:active {
+  transform: scale(0.98);
+}
+
+/* A disabled action must look unavailable, not merely faded. */
+.btnDisabled,
+.btnProceed:disabled {
+  cursor: not-allowed;
+}

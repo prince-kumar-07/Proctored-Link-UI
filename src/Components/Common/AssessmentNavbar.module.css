@@ -1,0 +1,138 @@
+
+/* ── NAV SHELL ── */
+.nav {
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  height: 60px;
+  z-index: 200;
+  transition: background 0.35s ease, box-shadow 0.35s ease,
+              backdrop-filter 0.35s ease;
+  background: transparent;
+}
+
+.navScrolled {
+  background: rgba(7, 8, 13, 0.88);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.055),
+    0 6px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* amber hairline only visible when scrolled */
+.topLine {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.0) 5%,
+    rgba(245, 158, 11, 0.60) 30%,
+    rgba(251, 191, 36, 0.40) 60%,
+    rgba(245, 158, 11, 0.0) 92%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.navScrolled .topLine {
+  opacity: 1;
+}
+
+/* ── CONTAINER ── */
+.container {
+  max-width: 1340px;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+}
+
+/* ── LOGO ── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: rgba(255, 255, 255, 0.90);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.15s;
+}
+.logo:hover { opacity: 0.82; }
+
+/* small geometric mark before wordmark */
+.logoMark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px; height: 26px;
+  border-radius: 7px;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+  background: rgba(245, 158, 11, 0.07);
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+.logo:hover .logoMark {
+  border-color: rgba(245, 158, 11, 0.50);
+  background: rgba(245, 158, 11, 0.12);
+}
+.logoMarkDot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent, #f59e0b);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.70);
+  animation: pulse 2.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    box-shadow: 0 0 8px  rgba(245,158,11,0.65); }
+  50%       { opacity: 0.7; transform: scale(0.85); box-shadow: 0 0 14px rgba(245,158,11,0.30); }
+}
+
+/* gradient accent on "Link" */
+.logoAccent {
+  background: linear-gradient(90deg, #5b8cff 0%, #00d4ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-weight: 800;
+}
+
+/* ── SECURE BADGE ── */
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 13px;
+  border-radius: 20px;
+  border: 1px solid rgba(52, 211, 153, 0.18);
+  background: rgba(52, 211, 153, 0.055);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.badgeDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 6px rgba(52, 211, 153, 0.70);
+  animation: badgePulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes badgePulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px  rgba(52,211,153,0.65); }
+  50%       { opacity: 0.6; box-shadow: 0 0 12px rgba(52,211,153,0.25); }
+}
+.badgeText {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(52, 211, 153, 0.85);
+  letter-spacing: 0.2px;
+}

@@ -1,0 +1,139 @@
+.sidebar {
+  width: 260px;
+  height: 100vh;
+
+  /* Aligned to the product zone. This panel previously ran on its own
+     navy plus a blue active state, making a third palette alongside the
+     marketing indigo and the product amber. */
+  background: var(--surface);
+
+  padding: 30px 20px;
+
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  border-right: 1px solid var(--border);
+
+  display: flex;
+  flex-direction: column;
+
+  z-index: 50;
+}
+
+/* Warm bloom anchored to the top of the rail. */
+.sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 320px;
+  background: radial-gradient(420px circle at 20% 0%, rgba(245, 158, 11, 0.07), transparent 70%);
+  pointer-events: none;
+}
+
+.heading {
+  margin-top: 50px;
+
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+
+  margin-bottom: 22px;
+  padding-left: 14px;
+
+  position: relative;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  position: relative;
+}
+
+.link,
+.activeLink {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+
+  position: relative;
+
+  transition:
+    color var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease),
+    transform var(--dur-2) var(--ease);
+}
+
+.link {
+  color: var(--muted);
+}
+
+.link:hover {
+  background: var(--surface2);
+  color: var(--text);
+  transform: translateX(3px);
+}
+
+.activeLink {
+  background: var(--accent-lo);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* The rail marker that identifies the current section. */
+.activeLink::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 22px;
+  border-radius: 0 3px 3px 0;
+  background: var(--accent);
+  box-shadow: 0 0 14px var(--accent-glow);
+}
+
+.icon {
+  font-size: 18px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: transform var(--dur-2) var(--ease-back);
+}
+
+.link:hover .icon,
+.activeLink .icon {
+  transform: scale(1.12);
+}
+
+/* Off-canvas behaviour for narrow viewports; `.show` was already
+   wired up in the component but had no rule backing it. */
+@media (max-width: 1100px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--dur-3) var(--ease);
+  }
+  .show {
+    transform: translateX(0);
+    box-shadow: var(--el-5);
+  }
+}

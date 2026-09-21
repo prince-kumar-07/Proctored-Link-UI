@@ -1,0 +1,882 @@
+/* AuthPage.module.css - Premium version */
+
+.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 15% 20%, #6366f144 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, #7c3aed44 0%, transparent 50%),
+    linear-gradient(145deg, #0a0e1f 0%, #0f172a 100%);
+  color: white;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  padding-top: 100px;
+}
+
+/* ────────────────────────────────────────────────
+   LEFT – Brand panel (slightly refined)
+───────────────────────────────────────────────── */
+.left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  position: relative;
+}
+
+.brandBox {
+  max-width: 460px;
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg, #e0e7ff, #c7d2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo span {
+  background: linear-gradient(90deg, #a5b4fc, #818cf8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.headline {
+  font-size: 52px;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #f1f5f9, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+  color: #cbd5e1;
+  font-size: 16px;
+  line-height: 1.7;
+  font-weight: 400;
+  margin-bottom: 40px;
+  letter-spacing: 0.1px;
+}
+
+.featureList p {
+  font-size: 15px;
+  color: #a5b4fc;
+  margin: 14px 0;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.featureList p::before {
+  content: "✓";
+  color: #818cf8;
+  font-weight: 700;
+}
+
+/* ────────────────────────────────────────────────
+   RIGHT – Auth card – Premium glass + depth
+───────────────────────────────────────────────── */
+.right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  position: relative;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 460px;
+  padding: 48px 44px;
+  border-radius: 24px;
+  background: rgba(15, 23, 42, 0.38);
+  border: 1px solid rgba(165, 180, 252, 0.12);
+  backdrop-filter: blur(28px) saturate(180%);
+  box-shadow:
+    0 30px 70px -12px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.authCard:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 50px 100px -20px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/* TABS ─ more premium sliding indicator */
+.tabs {
+  position: relative;
+  display: flex;
+  background: rgba(2, 6, 23, 0.6);
+  border-radius: 16px;
+  padding: 5px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(165, 180, 252, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.tabs button {
+  flex: 1;
+  padding: 14px 0;
+  border: none;
+  background: transparent;
+  color: #e9eaeb;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+}
+
+.tabs button:hover {
+  color: #e0e7ff;
+}
+
+.active {
+  color: white;
+  font-weight: 700;
+}
+
+/* Premium gradient slider */
+.slider {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: calc(50% - 10px);
+  height: calc(100% - 10px);
+  background: linear-gradient(90deg, #6366f1, #7c3aed, #a855f7);
+  border-radius: 12px;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 8px 25px rgba(99, 102, 241, 0.45),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+  transform: translateX(0);
+}
+
+.tabs button:nth-child(2)~.slider {
+  transform: translateX(100%);
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+/* FIELD */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.forgotLink {
+  align-self: flex-end;
+  margin-top: -2px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #a5b4fc;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.forgotLink:hover { color: #818cf8; text-decoration: underline; }
+
+.field label {
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #cbd5e1;
+  letter-spacing: 0.4px;
+}
+
+/* INPUTS – premium feeling */
+.field input,
+.code select,
+.phone input {
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(165, 180, 252, 0.14);
+  background: rgba(15, 23, 42, 0.65);
+  color: #f1f5f9;
+  font-size: 15px;
+  transition: all 0.25s ease;
+  box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.35);
+}
+
+.field input::placeholder,
+.phone input::placeholder {
+  color: #64748b;
+}
+
+.field input:hover,
+.code select:hover,
+.phone input:hover {
+  border-color: rgba(165, 180, 252, 0.35);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+.field input:focus,
+.code select:focus,
+.phone input:focus {
+  border-color: #818cf8;
+  box-shadow:
+    0 0 0 3px rgba(129, 140, 248, 0.22),
+    inset 0 1px 2px rgba(0, 0, 0, 0.3);
+  background: rgba(15, 23, 42, 0.9);
+  outline: none;
+}
+
+/* PHONE ROW */
+.phoneRow {
+  display: flex;
+  gap: 14px;
+}
+
+.code {
+  flex: 0 0 32%;
+}
+
+.phone {
+  flex: 1;
+}
+
+/* BUTTON – elevated premium look */
+.primaryBtn {
+  margin-top: 10px;
+  padding: 17px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(90deg, #6366f1, #7c3aed 50%, #a855f7);
+  background-size: 200% 100%;
+  background-position: 0% 0;
+  color: white;
+  font-size: 15.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+  box-shadow:
+    0 14px 40px -10px rgba(99, 102, 241, 0.55),
+    inset 0 1px 2px rgba(255, 255, 255, 0.25);
+}
+
+.primaryBtn:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 24px 60px -12px rgba(99, 102, 241, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  background-position: 100% 0;
+}
+
+.primaryBtn:active {
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 30px -8px rgba(194, 194, 225, 0.5);
+  color: white;
+}
+
+/* OTP OVERLAY */
+
+.otpOverlay {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(2, 6, 23, 0.72);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  z-index: 1000;
+
+  backdrop-filter: blur(10px);
+
+}
+
+
+/* MODAL — same glass language as .authCard, so this reads as part of
+   the same product rather than a leftover flat dialog dropped on top. */
+
+.otpModal {
+
+  width: 100%;
+  max-width: 400px;
+
+  padding: 40px 36px 32px;
+
+  border-radius: 24px;
+
+  background: rgba(15, 23, 42, 0.55);
+
+  border: 1px solid rgba(165, 180, 252, 0.14);
+
+  backdrop-filter: blur(28px) saturate(180%);
+
+  box-shadow:
+    0 30px 70px -12px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+
+}
+
+/* Faint top sheen, echoing the hairline highlight used across the
+   product's other glass surfaces. */
+.otpModal::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(165, 180, 252, 0.5), transparent);
+  pointer-events: none;
+}
+
+.otpIconRing {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.22), rgba(124, 58, 237, 0.16));
+  border: 1px solid rgba(165, 180, 252, 0.28);
+  box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.06);
+  color: #c7d2fe;
+}
+.otpIconRing svg { width: 26px; height: 26px; }
+
+.otpModal h3 {
+
+  margin: 0;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+
+}
+
+
+.otpSubtitle {
+
+  margin: 0 0 6px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #94a3b8;
+  max-width: 300px;
+
+}
+.otpSubtitle strong {
+  color: #e0e7ff;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ── OTP DIGIT BOXES ── */
+
+.otpBoxes {
+  display: flex;
+  gap: 9px;
+  margin: 6px 0 4px;
+}
+
+.otpBox {
+  width: 46px;
+  height: 54px;
+  border-radius: 12px;
+  border: 1px solid rgba(165, 180, 252, 0.16);
+  background: rgba(2, 6, 23, 0.55);
+  color: #f1f5f9;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  box-shadow: inset 0 1.5px 3px rgba(0, 0, 0, 0.35);
+  transition:
+    border-color var(--dur-2, 0.2s) var(--ease, ease),
+    box-shadow var(--dur-2, 0.2s) var(--ease, ease),
+    background var(--dur-2, 0.2s) var(--ease, ease),
+    transform var(--dur-1, 0.12s) var(--ease, ease);
+}
+
+.otpBox:focus {
+  outline: none;
+  border-color: rgba(129, 140, 248, 0.65);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.20);
+}
+
+.otpBoxFilled {
+  border-color: rgba(165, 180, 252, 0.4);
+  background: rgba(99, 102, 241, 0.10);
+}
+
+/* A filled digit box gets a quiet pop the instant it's typed — the
+   detail that makes typing a code feel responsive rather than just
+   accepted. */
+.otpBoxFilled { animation: otpBoxPop 0.22s var(--ease-back, cubic-bezier(0.34,1.56,0.64,1)) both; }
+@keyframes otpBoxPop {
+  from { transform: scale(0.85); }
+  to   { transform: scale(1); }
+}
+
+.otpBoxesError .otpBox {
+  border-color: rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.06);
+  animation: otpShake 0.36s ease;
+}
+@keyframes otpShake {
+  10%, 90%  { transform: translateX(-1px); }
+  20%, 80%  { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60%  { transform: translateX(4px); }
+}
+
+.otpErrorMsg {
+  margin: 0 0 2px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #fca5a5;
+}
+
+/* ── RESEND ── */
+.otpResend {
+  margin: 2px 0 18px;
+  padding: 4px;
+  border: none;
+  background: none;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #a5b4fc;
+  cursor: pointer;
+  transition: color var(--dur-2, 0.2s) var(--ease, ease);
+}
+.otpResend:hover:not(:disabled) { color: #c7d2fe; text-decoration: underline; }
+.otpResend:disabled {
+  color: #64748b;
+  cursor: default;
+}
+
+
+/* BUTTONS */
+
+.otpActions {
+
+  display: flex;
+  gap: 10px;
+
+  margin-top: 10px;
+
+}
+
+
+.secondaryBtn {
+
+  flex: 1;
+
+  padding: -20px;
+
+  border: none;
+
+  border-radius: 50px;
+
+  background: #e4261c;
+
+  color: white;
+
+  cursor: pointer;
+
+}
+
+/* RESULT OVERLAY */
+
+.resultOverlay {
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1200;
+
+  backdrop-filter: blur(10px);
+
+}
+
+
+
+/* RESULT MODAL */
+
+.resultModal {
+
+  width: 360px;
+
+  padding: 30px;
+
+  border-radius: 16px;
+
+  background: #020617;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 0 40px 80px rgba(0, 0, 0, .9);
+
+  text-align: center;
+
+  animation: popup .35s ease;
+
+}
+
+@keyframes popup {
+
+  from {
+    transform: scale(.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+
+
+/* SUCCESS */
+
+.successBox h3 {
+
+  color: #22c55e;
+
+  margin-top: 15px;
+
+}
+
+.checkmark {
+
+  width: 60px;
+  height: 60px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  border: 4px solid #22c55e;
+
+  position: relative;
+
+  animation: scaleIn .4s ease;
+
+}
+
+.checkmark::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 12px;
+  height: 26px;
+
+  border-right: 4px solid #22c55e;
+  border-bottom: 4px solid #22c55e;
+
+  transform: rotate(45deg);
+
+  left: 20px;
+  top: 10px;
+
+}
+
+
+
+/* FAILED */
+
+.failBox h3 {
+
+  color: #ef4444;
+
+  margin-top: 15px;
+
+}
+
+.cross {
+
+  width: 60px;
+  height: 60px;
+
+  margin: auto;
+
+  border-radius: 50%;
+
+  border: 4px solid #ef4444;
+
+  position: relative;
+
+  animation: scaleIn .4s ease;
+
+}
+
+.cross::before,
+.cross::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 26px;
+  height: 4px;
+
+  background: #ef4444;
+
+  top: 26px;
+  left: 14px;
+
+}
+
+.cross::before {
+  transform: rotate(45deg);
+}
+
+.cross::after {
+  transform: rotate(-45deg);
+}
+
+
+
+/* SCALE */
+
+@keyframes scaleIn {
+
+  from {
+    transform: scale(.5);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+}
+
+.primaryBtn {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.primaryBtn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(79, 70, 229, 0.25);
+}
+
+.primaryBtn:active {
+  transform: scale(0.97);
+}
+
+
+.secondaryBtn {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.secondaryBtn:hover {
+  background: #e5e7eb;
+}
+/* ============================================================
+   PREMIUM LAYER
+   ============================================================ */
+
+/* Ambient light behind the brand panel. */
+.brandAurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+.brandAurora span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+}
+.brandAurora span:nth-child(1) {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.34), transparent 70%);
+  top: -80px; left: -60px;
+  animation: authOrb1 22s ease-in-out infinite;
+}
+.brandAurora span:nth-child(2) {
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.30), transparent 70%);
+  bottom: -60px; right: 10%;
+  animation: authOrb2 28s ease-in-out infinite;
+}
+@keyframes authOrb1 {
+  0%,100% { transform: translate3d(0,0,0) scale(1); }
+  50%     { transform: translate3d(50px,40px,0) scale(1.14); }
+}
+@keyframes authOrb2 {
+  0%,100% { transform: translate3d(0,0,0) scale(1); }
+  50%     { transform: translate3d(-40px,-30px,0) scale(1.1); }
+}
+
+/* Replace the text tick with a proper badge. */
+.featureList p::before { content: none; }
+.tick {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #c7d2fe;
+  background: rgba(99, 102, 241, 0.16);
+  border: 1px solid rgba(129, 140, 248, 0.32);
+}
+.tick svg { width: 12px; height: 12px; }
+
+/* Layout transforms fight framer-motion, so the card lifts with light
+   rather than movement. */
+.authCard:hover { transform: none; }
+
+.formWrap { position: relative; }
+
+/* Password reveal toggle */
+.inputWrap { position: relative; display: block; }
+.inputWrap input { padding-right: 46px !important; width: 100%; }
+
+.pwToggle {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: #8b8fa8;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: color var(--dur-2) var(--ease), background var(--dur-2) var(--ease);
+}
+.pwToggle svg { width: 18px; height: 18px; }
+.pwToggle:hover { color: #c7d2fe; background: rgba(255, 255, 255, 0.06); }
+
+/* Inputs: a focus state with a visible ring instead of a colour nudge. */
+.field input,
+.field select,
+.phone input,
+.code select {
+  transition:
+    border-color var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    background var(--dur-2) var(--ease);
+}
+.field input:focus,
+.field select:focus,
+.phone input:focus,
+.code select:focus {
+  outline: none;
+  border-color: rgba(129, 140, 248, 0.6);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+}
+
+/* Tab slider gets the shared settle curve. */
+.slider {
+  transition: left 0.38s var(--ease), background 0.3s var(--ease);
+}
+
+/* Primary button sweep */
+.primaryBtn {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-2) var(--ease),
+    box-shadow var(--dur-2) var(--ease),
+    filter var(--dur-2) var(--ease);
+}
+.primaryBtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,0.26) 50%, transparent 80%);
+  transform: translateX(-120%);
+  transition: transform 0.75s var(--ease);
+  pointer-events: none;
+}
+.primaryBtn:hover::after { transform: translateX(120%); }
+.primaryBtn:active { transform: scale(0.985); }
+
+/* Soft-disabled: still a real, focusable button (so OtpBoxes' auto-
+   submit and the shared handleVerifyOTP guard can coexist with it),
+   just visibly not ready to submit yet. */
+.primaryBtn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.primaryBtn[aria-disabled="true"]:hover::after { transform: translateX(-120%); }
+.primaryBtn[aria-disabled="true"]:active { transform: none; }
+
+.secondaryBtn { transition: background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease); }
+
+/* The modal animations are owned by framer-motion now. */
+.otpModal, .resultModal, .otpOverlay, .resultOverlay { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .brandAurora span { animation: none; }
+}
