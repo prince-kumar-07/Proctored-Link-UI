@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./ExamRedirect.module.css";
+import styles from "./Examredirect.module.css";
 import {
   FiClock, FiCheckCircle, FiAlertTriangle, FiLock,
   FiArrowLeft, FiMail, FiRefreshCw, FiCalendar,
