@@ -75,6 +75,19 @@ export default function ExamPreCheck() {
   };
 
   const checkScreen = async () => {
+    // Screen capture isn't implemented on iOS/iPadOS Safari at all, and is
+    // spotty across Android tablet browsers. Feature-detect it up front so
+    // those devices get an accurate "not supported" message instead of the
+    // catch-all below misreporting it as the user having denied permission.
+    if (typeof navigator.mediaDevices?.getDisplayMedia !== 'function') {
+      updateCheck(
+        'screen',
+        'error',
+        'Screen sharing isn\'t supported on this device — please use a desktop or laptop',
+      );
+      return;
+    }
+
     try {
       const stream = await navigator.mediaDevices.getDisplayMedia({ video: true });
       const [track] = stream.getVideoTracks();
